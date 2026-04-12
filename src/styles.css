@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap');
+
+:root {
+  --bg-base: #07111e;
+  --bg-top: #10263f;
+  --text-primary: #f5f0e6;
+  --text-secondary: #c6d1e1;
+  --text-muted: #8ea2bf;
+  --accent: #f7c757;
+  --accent-strong: #f59648;
+  --border-soft: rgb(255 255 255 / 0.08);
+  --border-strong: rgb(255 255 255 / 0.16);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  font-family: 'Instrument Sans', sans-serif;
+  background:
+    radial-gradient(circle at top left, rgb(247 199 87 / 0.18), transparent 24%),
+    radial-gradient(circle at top right, rgb(245 150 72 / 0.12), transparent 28%),
+    linear-gradient(180deg, var(--bg-top), var(--bg-base) 36%, #040b16);
+  color: var(--text-primary);
+}
+
+a {
+  color: inherit;
+}
