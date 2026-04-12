@@ -1,4 +1,7 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+
+type ThemeMode = 'light' | 'dark';
 
 @Component({
   selector: 'app-root',
@@ -8,6 +11,11 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class App {
+  private readonly document = inject(DOCUMENT);
+
+  protected readonly currentYear = new Date().getFullYear();
+  protected readonly theme = signal<ThemeMode>('dark');
+
   protected readonly profile = {
     name: 'Gurpreet Singh',
     title: 'Senior Software Engineer',
@@ -18,6 +26,13 @@ export class App {
     linkedin: 'https://www.linkedin.com/in/gurpreet-singh-ab5166235',
     resume: 'resume/gur-resume-28-01-26.pdf'
   };
+
+  protected readonly navItems = [
+    { label: 'About', href: '#about' },
+    { label: 'Experience', href: '#experience' },
+    { label: 'Projects', href: '#projects' },
+    { label: 'Contact', href: '#contact' }
+  ];
 
   protected readonly highlights = [
     '4.7+ years in full-stack product development',
@@ -114,4 +129,32 @@ export class App {
     summary:
       'Built practical skills through coding contests, workshops, and project-based learning.'
   };
+
+  constructor() {
+    const savedTheme = this.getStoredTheme();
+    this.applyTheme(savedTheme ?? this.getPreferredTheme());
+  }
+
+  protected toggleTheme(): void {
+    this.applyTheme(this.theme() === 'dark' ? 'light' : 'dark');
+  }
+
+  private applyTheme(mode: ThemeMode): void {
+    this.theme.set(mode);
+    this.document.documentElement.setAttribute('data-theme', mode);
+    this.document.body.setAttribute('data-theme', mode);
+    this.document.body.style.colorScheme = mode;
+    this.document.defaultView?.localStorage.setItem('portfolio-theme', mode);
+  }
+
+  private getStoredTheme(): ThemeMode | null {
+    const stored = this.document.defaultView?.localStorage.getItem('portfolio-theme');
+    return stored === 'light' || stored === 'dark' ? stored : null;
+  }
+
+  private getPreferredTheme(): ThemeMode {
+    return this.document.defaultView?.matchMedia?.('(prefers-color-scheme: light)').matches
+      ? 'light'
+      : 'dark';
+  }
 }

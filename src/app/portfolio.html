@@ -1,167 +1,228 @@
-<main class="page-shell">
-  <section class="hero panel">
-    <div class="hero-copy">
-      <p class="eyebrow">Portfolio</p>
-      <h1>{{ profile.name }}</h1>
-      <p class="hero-title">{{ profile.title }}</p>
-      <p class="hero-summary">
-        {{ profile.subtitle }}. I design responsive product experiences, modernize Angular
-        codebases, and connect AI capabilities to real business workflows.
-      </p>
+<div class="page-shell">
+  <div class="page-orb page-orb-one"></div>
+  <div class="page-orb page-orb-two"></div>
 
-      <div class="hero-actions">
-        <a class="button button-primary" [href]="profile.resume" target="_blank" rel="noopener">
-          View Resume
-        </a>
-        <a class="button button-secondary" [href]="profile.linkedin" target="_blank" rel="noopener">
-          LinkedIn
-        </a>
-      </div>
+  <header class="topbar">
+    <a class="brand" href="#home">
+      <span class="brand-mark">GS</span>
+      <span class="brand-copy">
+        <strong>{{ profile.name }}</strong>
+        <span>{{ profile.title }}</span>
+      </span>
+    </a>
 
-      <ul class="highlight-list">
-        @for (item of highlights; track item) {
-          <li>{{ item }}</li>
+    <nav aria-label="Primary navigation">
+      <ul class="nav-links">
+        @for (item of navItems; track item.href) {
+          <li>
+            <a [href]="item.href">{{ item.label }}</a>
+          </li>
         }
       </ul>
-    </div>
+    </nav>
 
-    <aside class="hero-card">
-      <div class="hero-card-badge">Available for impactful product engineering roles</div>
-      <div class="hero-card-grid">
-        @for (metric of metrics; track metric.label) {
-          <article>
-            <strong>{{ metric.value }}</strong>
-            <span>{{ metric.label }}</span>
+    <div class="topbar-actions">
+      <button
+        type="button"
+        class="theme-toggle"
+        (click)="toggleTheme()"
+        [attr.aria-label]="theme() === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'">
+        <span class="theme-toggle-track">
+          <span class="theme-toggle-icon">{{ theme() === 'dark' ? 'Dark' : 'Light' }}</span>
+        </span>
+      </button>
+      <a class="button button-primary topbar-cta" [href]="'mailto:' + profile.email">Hire Me</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero panel" id="home">
+      <div class="hero-copy">
+        <p class="eyebrow">Portfolio 2026</p>
+        <div class="hero-intro">
+          <span class="status-pill">Open to impactful product engineering roles</span>
+          <span class="status-pill status-pill-muted">{{ profile.location }}</span>
+        </div>
+        <h1>{{ profile.name }}</h1>
+        <p class="hero-title">{{ profile.title }}</p>
+        <p class="hero-summary">
+          {{ profile.subtitle }}. I build polished SaaS experiences, modernize Angular products,
+          and connect AI capabilities to practical business workflows that teams can actually ship.
+        </p>
+
+        <div class="hero-actions">
+          <a class="button button-primary" [href]="profile.resume" target="_blank" rel="noopener">
+            View Resume
+          </a>
+          <a class="button button-secondary" [href]="profile.linkedin" target="_blank" rel="noopener">
+            LinkedIn
+          </a>
+          <a class="button button-ghost" href="#projects">Explore Work</a>
+        </div>
+
+        <ul class="highlight-list">
+          @for (item of highlights; track item) {
+            <li>{{ item }}</li>
+          }
+        </ul>
+      </div>
+
+      <aside class="hero-card">
+        <div class="hero-card-badge">Focused on scalable UI, AI workflows, and product velocity</div>
+
+        <div class="hero-card-grid">
+          @for (metric of metrics; track metric.label) {
+            <article>
+              <strong>{{ metric.value }}</strong>
+              <span>{{ metric.label }}</span>
+            </article>
+          }
+        </div>
+
+        <div class="mini-panel">
+          <p class="mini-panel-label">Current focus</p>
+          <h3>Angular delivery with practical AI integration</h3>
+          <p>
+            Shipping responsive interfaces, semantic search workflows, and full-stack product
+            systems that stay maintainable as teams grow.
+          </p>
+        </div>
+
+        <dl class="contact-list">
+          <div>
+            <dt>Email</dt>
+            <dd>
+              <a [href]="'mailto:' + profile.email">{{ profile.email }}</a>
+            </dd>
+          </div>
+          <div>
+            <dt>Phone</dt>
+            <dd>
+              <a [href]="'tel:' + profile.phone">{{ profile.phone }}</a>
+            </dd>
+          </div>
+          <div>
+            <dt>LinkedIn</dt>
+            <dd>
+              <a [href]="profile.linkedin" target="_blank" rel="noopener">View profile</a>
+            </dd>
+          </div>
+        </dl>
+      </aside>
+    </section>
+
+    <section class="section-grid" id="about">
+      <article class="panel section-card feature-card">
+        <p class="eyebrow">Profile</p>
+        <h2>Full-stack execution with a strong AI edge</h2>
+        <p>
+          Senior Software Engineer with 4.7+ years of experience building web and mobile
+          products, now focused on combining Angular delivery with LLM-based systems,
+          embeddings, semantic search, and cloud automation.
+        </p>
+        <p>
+          Recent work includes OpenAI and Azure AI integrations, RAG-driven nutrition
+          workflows, and production-grade applications for dietitians and client operations.
+        </p>
+      </article>
+
+      <article class="panel section-card">
+        <p class="eyebrow">Core Expertise</p>
+        <h2>What I bring to product teams</h2>
+        <div class="tag-cloud">
+          @for (item of expertise; track item) {
+            <span>{{ item }}</span>
+          }
+        </div>
+      </article>
+    </section>
+
+    <section class="panel space-mt" id="experience">
+      <p class="eyebrow">Experience</p>
+      <div class="section-heading">
+        <h2>Roles that shaped my engineering approach</h2>
+        <p>
+          From hands-on product delivery to mentoring and AI integration, each role added a new
+          layer of ownership.
+        </p>
+      </div>
+
+      <div class="timeline">
+        @for (job of experience; track job.company) {
+          <article class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content">
+              <div class="timeline-header">
+                <div>
+                  <h3>{{ job.role }}</h3>
+                  <p class="timeline-company">{{ job.company }}</p>
+                </div>
+                <span class="timeline-period">{{ job.period }}</span>
+              </div>
+
+              <p class="timeline-summary">{{ job.summary }}</p>
+
+              <ul>
+                @for (achievement of job.achievements; track achievement) {
+                  <li>{{ achievement }}</li>
+                }
+              </ul>
+            </div>
           </article>
         }
       </div>
+    </section>
 
-      <dl class="contact-list">
-        <div>
-          <dt>Location</dt>
-          <dd>{{ profile.location }}</dd>
-        </div>
-        <div>
-          <dt>Email</dt>
-          <dd>
-            <a [href]="'mailto:' + profile.email">{{ profile.email }}</a>
-          </dd>
-        </div>
-        <div>
-          <dt>Phone</dt>
-          <dd>
-            <a [href]="'tel:' + profile.phone">{{ profile.phone }}</a>
-          </dd>
-        </div>
-      </dl>
-    </aside>
-  </section>
+    <section class="panel space-mt" id="projects">
+      <p class="eyebrow">Selected Work</p>
+      <div class="section-heading">
+        <h2>Products built around operations, nutrition, and AI</h2>
+        <p>
+          These projects show a mix of SaaS thinking, mobile delivery, and domain-specific
+          intelligence.
+        </p>
+      </div>
 
-  <section class="section-grid">
-    <article class="panel section-card">
-      <p class="eyebrow">Profile</p>
-      <h2>Full-stack execution with a strong AI edge</h2>
-      <p>
-        Senior Software Engineer with 4.7+ years of experience building web and mobile
-        products, now focused on combining Angular delivery with LLM-based systems,
-        embeddings, semantic search, and cloud automation.
-      </p>
-      <p>
-        Recent work includes OpenAI and Azure AI integrations, RAG-driven nutrition
-        workflows, and production-grade applications for dietitians and client operations.
-      </p>
-    </article>
-
-    <article class="panel section-card">
-      <p class="eyebrow">Core Expertise</p>
-      <h2>What I bring to product teams</h2>
-      <div class="tag-cloud">
-        @for (item of expertise; track item) {
-          <span>{{ item }}</span>
+      <div class="project-grid">
+        @for (project of projects; track project.name) {
+          <article class="project-card">
+            <p class="project-stack">{{ project.stack }}</p>
+            <h3>{{ project.name }}</h3>
+            <p>{{ project.description }}</p>
+          </article>
         }
       </div>
-    </article>
-  </section>
+    </section>
 
-  <section class="panel">
-    <p class="eyebrow">Experience</p>
-    <div class="section-heading">
-      <h2>Roles that shaped my engineering approach</h2>
-      <p>
-        From hands-on product delivery to mentoring and AI integration, each role added a new
-        layer of ownership.
-      </p>
-    </div>
+    <section class="section-grid" id="contact">
+      <article class="panel section-card">
+        <p class="eyebrow">Education</p>
+        <h2>{{ education.degree }}</h2>
+        <p class="education-school">{{ education.school }}</p>
+        <p class="education-period">{{ education.period }}</p>
+        <p>{{ education.summary }}</p>
+      </article>
 
-    <div class="timeline">
-      @for (job of experience; track job.company) {
-        <article class="timeline-item">
-          <div class="timeline-marker"></div>
-          <div class="timeline-content">
-            <div class="timeline-header">
-              <div>
-                <h3>{{ job.role }}</h3>
-                <p class="timeline-company">{{ job.company }}</p>
-              </div>
-              <span class="timeline-period">{{ job.period }}</span>
-            </div>
+      <article class="panel section-card contact-card">
+        <p class="eyebrow">Let's Connect</p>
+        <h2>Looking for teams shipping modern Angular products</h2>
+        <p>
+          If you are building SaaS products, AI-assisted workflows, or high-trust user
+          experiences, I would love to contribute.
+        </p>
+        <div class="contact-actions">
+          <a class="button button-primary" [href]="'mailto:' + profile.email">Email Me</a>
+          <a class="button button-secondary" [href]="profile.resume" target="_blank" rel="noopener">
+            Download Resume
+          </a>
+        </div>
+        <p class="contact-note">Available for remote, hybrid, and product-focused engineering work.</p>
+      </article>
+    </section>
+  </main>
 
-            <p class="timeline-summary">{{ job.summary }}</p>
-
-            <ul>
-              @for (achievement of job.achievements; track achievement) {
-                <li>{{ achievement }}</li>
-              }
-            </ul>
-          </div>
-        </article>
-      }
-    </div>
-  </section>
-
-  <section class="panel">
-    <p class="eyebrow">Selected Work</p>
-    <div class="section-heading">
-      <h2>Products built around operations, nutrition, and AI</h2>
-      <p>
-        These projects show a mix of SaaS thinking, mobile delivery, and domain-specific
-        intelligence.
-      </p>
-    </div>
-
-    <div class="project-grid">
-      @for (project of projects; track project.name) {
-        <article class="project-card">
-          <p class="project-stack">{{ project.stack }}</p>
-          <h3>{{ project.name }}</h3>
-          <p>{{ project.description }}</p>
-        </article>
-      }
-    </div>
-  </section>
-
-  <section class="section-grid">
-    <article class="panel section-card">
-      <p class="eyebrow">Education</p>
-      <h2>{{ education.degree }}</h2>
-      <p class="education-school">{{ education.school }}</p>
-      <p class="education-period">{{ education.period }}</p>
-      <p>{{ education.summary }}</p>
-    </article>
-
-    <article class="panel section-card">
-      <p class="eyebrow">Let’s Connect</p>
-      <h2>Looking for teams shipping modern Angular products</h2>
-      <p>
-        If you are building SaaS products, AI-assisted workflows, or high-trust user
-        experiences, I would love to contribute.
-      </p>
-      <div class="contact-actions">
-        <a class="button button-primary" [href]="'mailto:' + profile.email">Email Me</a>
-        <a class="button button-secondary" [href]="profile.resume" target="_blank" rel="noopener">
-          Download Resume
-        </a>
-      </div>
-    </article>
-  </section>
-</main>
+  <footer class="site-footer">
+    <p>Built for clarity, speed, and modern product storytelling.</p>
+    <span>&copy; {{ currentYear }} {{ profile.name }}</span>
+  </footer>
+</div>
