@@ -5,14 +5,10 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist/portfolio-app/browser",
 
-  "routes": [
+  "rewrites": [
     {
-      "src": "/sitemap.xml",
-      "dest": "/sitemap.xml"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/index.html"
+      "source": "/sitemap.xml",
+      "destination": "/sitemap.xml"
     }
   ],
 
