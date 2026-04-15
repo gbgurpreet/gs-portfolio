@@ -1,14 +1,16 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "framework": "angular",
   "installCommand": "npm ci",
   "buildCommand": "npm run build",
   "outputDirectory": "dist/portfolio-app/browser",
 
-  "rewrites": [
+  "routes": [
     {
-      "source": "/sitemap.xml",
-      "destination": "/sitemap.xml"
+      "handle": "filesystem"
+    },
+    {
+      "src": "/.*",
+      "dest": "/index.html"
     }
   ],
 
