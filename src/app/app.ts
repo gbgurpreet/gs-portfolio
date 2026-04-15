@@ -23,7 +23,7 @@ export class App {
     location: 'Ludhiana, Punjab, India',
     email: 'gurpr33t1998@gmail.com',
     phone: '+91 7986364435',
-    linkedin: 'https://www.linkedin.com/in/gurpreet-singh-ab5166235',
+    linkedin: 'https://www.linkedin.com/in/gbgurpreet',
     resume: 'resume/gur-resume-28-01-26.pdf'
   };
 
