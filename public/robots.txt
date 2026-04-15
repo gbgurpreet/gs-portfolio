@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://gbgurpreet.vercel.app/sitemap.xml
+robots.txt
